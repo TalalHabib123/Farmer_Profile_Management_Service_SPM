@@ -1,0 +1,42 @@
+{
+    "$id": "User",
+    "type": "object",
+    "properties": {
+      "userId": { "type": "string" },
+      "role": { "type": "string", "enum": ["Farmer", "Vendor", "Supplier"] },
+      "personalDetails": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "contactInfo": {
+            "type": "object",
+            "properties": {
+              "email": { "type": "string", "format": "email" },
+              "phone": { "type": "string" }
+            },
+            "required": ["email", "phone"]
+          },
+          "address": { "type": "string" },
+          "businessDetails": {
+            "type": "object",
+            "properties": {
+              "businessName": { "type": "string" },
+              "businessType": { "type": "string" }
+            }
+          }
+        },
+        "required": ["firstName", "lastName", "contactInfo", "address"]
+      },
+      "preferences": {
+        "type": "object",
+        "properties": {
+          "notifications": { "type": "boolean" }
+        }
+      },
+      "createdAt": { "type": "string", "format": "date-time" },
+      "updatedAt": { "type": "string", "format": "date-time" }
+    },
+    "required": ["userId", "role", "personalDetails", "createdAt", "updatedAt"]
+  }
+  

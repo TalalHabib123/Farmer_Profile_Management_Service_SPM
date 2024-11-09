@@ -1,0 +1,34 @@
+{
+    "$id": "SupplierProfile",
+    "allOf": [
+      { "$ref": "User" },
+      {
+        "type": "object",
+        "properties": {
+          "supplierDetails": {
+            "type": "object",
+            "properties": {
+              "suppliedProducts": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "logistics": {
+                "type": "object",
+                "properties": {
+                  "deliveryAreas": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "averageDeliveryTime": { "type": "number" }
+                },
+                "required": ["deliveryAreas", "averageDeliveryTime"]
+              }
+            },
+            "required": ["suppliedProducts", "logistics"]
+          }
+        },
+        "required": ["supplierDetails"]
+      }
+    ]
+  }
+  

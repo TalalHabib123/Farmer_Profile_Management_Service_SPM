@@ -1,0 +1,69 @@
+{
+    "$id": "FarmerProfile",
+    "allOf": [
+      { "$ref": "User" },
+      {
+        "type": "object",
+        "properties": {
+          "farmDetails": {
+            "type": "object",
+            "properties": {
+              "farmLocation": {
+                "type": "object",
+                "properties": {
+                  "latitude": { "type": "number" },
+                  "longitude": { "type": "number" },
+                  "address": { "type": "string" }
+                },
+                "required": ["latitude", "longitude", "address"]
+              },
+              "farmSize": { "type": "number" },
+              "cropsGrown": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "licenseCertifications": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "required": ["farmLocation", "farmSize", "cropsGrown"]
+          },
+          "financialDetails": {
+            "type": "object",
+            "properties": {
+              "creditScore": { "type": "number" },
+              "loanApplications": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "loanId": { "type": "string" },
+                    "amount": { "type": "number" },
+                    "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+                    "applicationDate": { "type": "string", "format": "date-time" }
+                  },
+                  "required": ["loanId", "amount", "status", "applicationDate"]
+                }
+              },
+              "subsidyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "applicationId": { "type": "string" },
+                    "subsidyType": { "type": "string" },
+                    "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+                    "applicationDate": { "type": "string", "format": "date-time" }
+                  },
+                  "required": ["applicationId", "subsidyType", "status", "applicationDate"]
+                }
+              }
+            }
+          }
+        },
+        "required": ["farmDetails"]
+      }
+    ]
+  }
+  
