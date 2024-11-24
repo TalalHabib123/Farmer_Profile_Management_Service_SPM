@@ -2,6 +2,15 @@ const axios = require('axios');
 
 const SUBSIDYANDREG_SERVICE_URL = process.env.SUBSIDYANDREG_SERVICE_URL;
 
+// Helper function to handle errors
+const handleError = (error) => {
+    if (error.response && error.response.data && error.response.data.error) {
+        throw new Error(error.response.data.error);
+    } else {
+        throw new Error('Database Service Error');
+    }
+};
+
 exports.getAllSubsidies = async (GovOffID) => {
     try {
         const response = await axios.get(`${SUBSIDYANDREG_SERVICE_URL}/subsidies/${GovOffID}/all`);
