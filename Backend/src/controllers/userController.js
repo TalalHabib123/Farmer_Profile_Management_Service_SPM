@@ -105,7 +105,16 @@ const userController = {
     } catch (error) {
       next(error);
     }
-  }
+  },
+
+  deleteUserPreferences: async (req, res, next) => {
+    try {
+      await databaseService.deleteUserPreferences(req.params.userId);
+      res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = userController;

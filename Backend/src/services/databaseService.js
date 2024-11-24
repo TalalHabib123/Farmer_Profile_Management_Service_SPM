@@ -108,3 +108,30 @@ exports.getUserPreferences = async (userId) => {
     handleError(error);
   }
 };
+
+exports.deleteUserPreferences = async (userId) => {
+  try {
+    await axios.delete(`${DATABASE_SERVICE_URL}/users/${userId}/preferences`);
+    return true;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getAllFarmerFields = async (FarmerID) => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/users/${FarmerID}/farmer/fields/all`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getFarmerFieldById = async (FarmerID, fieldID) => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/users/${FarmerID}/farmer/fields/${fieldID}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};

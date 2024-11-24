@@ -14,7 +14,8 @@ router.route('/:userId')
 
 router.route('/:userId/preferences')
     .get(userController.getUserPreferences)
-    .put(userController.updateUserPreferences);
+    .put(userController.updateUserPreferences)
+    .delete(userController.deleteUserPreferences)
 
 
 module.exports = router;
