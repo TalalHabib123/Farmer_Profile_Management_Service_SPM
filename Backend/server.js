@@ -7,8 +7,14 @@ app.use(express.json());
 
 // Routes
 const userRoutes = require('./src/routes/userRoutes');
+const farmerRoutes = require('./src/routes/farmerRoutes');
+const supplierRoutes = require('./src/routes/supplierRoutes');
+const govoffRoutes = require('./src/routes/govoffRoutes');
 
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
+app.use('/farmer', farmerRoutes);
+app.use('/supplier', supplierRoutes);
+app.use('/govoff', govoffRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

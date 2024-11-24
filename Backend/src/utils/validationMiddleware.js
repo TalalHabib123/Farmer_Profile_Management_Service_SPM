@@ -6,7 +6,7 @@ addFormats(ajv);
 
 const userSchema = require('../schemas/User.json');
 const farmerSchema = require('../schemas/FarmerProfile.json');
-const vendorSchema = require('../schemas/VendorProfile.json');
+const govSchema = require('../schemas/GovermentOfficail.json');
 const supplierSchema = require('../schemas/SupplierProfile.json');
 
 ajv.addSchema(userSchema, 'User');
@@ -27,8 +27,8 @@ exports.validateFarmerProfile = (data) => {
   }
 };
 
-exports.validateVendorProfile = (data) => {
-  const validate = ajv.compile(vendorSchema);
+exports.validateGovOffProfile = (data) => {
+  const validate = ajv.compile(govSchema);
   if (!validate(data)) {
     const errors = ajv.errorsText(validate.errors);
     throw new Error('Invalid Vendor Profile Data: ' + errors);

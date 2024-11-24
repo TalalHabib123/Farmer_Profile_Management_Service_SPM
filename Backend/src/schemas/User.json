@@ -1,42 +1,57 @@
 {
-    "$id": "User",
-    "type": "object",
-    "properties": {
-      "userId": { "type": "string" },
-      "role": { "type": "string", "enum": ["Farmer", "Vendor", "Supplier"] },
-      "personalDetails": {
-        "type": "object",
-        "properties": {
-          "firstName": { "type": "string" },
-          "lastName": { "type": "string" },
-          "contactInfo": {
-            "type": "object",
-            "properties": {
-              "email": { "type": "string", "format": "email" },
-              "phone": { "type": "string" }
-            },
-            "required": ["email", "phone"]
-          },
-          "address": { "type": "string" },
-          "businessDetails": {
-            "type": "object",
-            "properties": {
-              "businessName": { "type": "string" },
-              "businessType": { "type": "string" }
-            }
-          }
-        },
-        "required": ["firstName", "lastName", "contactInfo", "address"]
+  "$id": "User",
+  "type": "object",
+  "properties": {
+    "userId": { "type": "string" },
+    "username": { "type": "string", "minLength": 3, "maxLength": 30 },
+    "password": { "type": "string" },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Farmer", "Supplier", "Buyer", "Admin", "GovernmentOfficial"]
       },
-      "preferences": {
-        "type": "object",
-        "properties": {
-          "notifications": { "type": "boolean" }
+      "minItems": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "inactive"],
+      "default": "active"
+    },
+    "failedLoginAttempts": { "type": "integer", "minimum": 0, "default": 0 },
+    "lastLogin": { "type": "string", "format": "date-time" },
+    "personalDetails": {
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "contactInfo": {
+          "type": "object",
+          "properties": {
+            "email": { "type": "string", "format": "email" },
+            "phone": { "type": "string" }
+          },
+          "required": ["email", "phone"]
+        },
+        "address": { "type": "string" },
+        "businessDetails": {
+          "type": "object",
+          "properties": {
+            "businessName": { "type": "string" },
+            "businessType": { "type": "string" }
+          }
         }
       },
-      "createdAt": { "type": "string", "format": "date-time" },
-      "updatedAt": { "type": "string", "format": "date-time" }
+      "required": ["firstName", "lastName", "contactInfo", "address"]
     },
-    "required": ["userId", "role", "personalDetails", "createdAt", "updatedAt"]
-  }
-  
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "notifications": { "type": "boolean", "default": true }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": ["userId", "username", "password", "roles", "personalDetails", "createdAt", "updatedAt"]
+}

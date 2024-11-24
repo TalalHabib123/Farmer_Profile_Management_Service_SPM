@@ -3,15 +3,18 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
-// User Routes
-router.post('/', userController.createUser);
-router.get('/', userController.listUsers);
-router.get('/:userId', userController.getUserById);
-router.put('/:userId', userController.updateUser);
-router.delete('/:userId', userController.deleteUser);
+router.route('/')
+  .post(userController.createUser)
+  .get(userController.listUsers);
 
-// Preferences Routes
-router.get('/:userId/preferences', userController.getUserPreferences);
-router.put('/:userId/preferences', userController.updateUserPreferences);
+router.route('/:userId')
+    .get(userController.getUserById)
+    .put(userController.updateUser)
+    .delete(userController.deleteUser)
+
+router.route('/:userId/preferences')
+    .get(userController.getUserPreferences)
+    .put(userController.updateUserPreferences);
+
 
 module.exports = router;

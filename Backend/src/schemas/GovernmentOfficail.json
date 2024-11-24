@@ -1,0 +1,14 @@
+{
+  "$id": "GovernmentOfficial",
+  "allOf": [
+    { "$ref": "User" },
+    {
+      "type": "object",
+      "properties": {
+        "user": { "type": "string" },  
+        "department": { "type": "string" }
+      },
+      "required": ["user", "department"]
+    }
+  ]
+}

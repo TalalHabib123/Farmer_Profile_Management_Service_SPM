@@ -1,69 +1,62 @@
 {
-    "$id": "FarmerProfile",
-    "allOf": [
-      { "$ref": "User" },
-      {
-        "type": "object",
-        "properties": {
-          "farmDetails": {
-            "type": "object",
-            "properties": {
-              "farmLocation": {
-                "type": "object",
-                "properties": {
-                  "latitude": { "type": "number" },
-                  "longitude": { "type": "number" },
-                  "address": { "type": "string" }
-                },
-                "required": ["latitude", "longitude", "address"]
+  "$id": "FarmerProfile",
+  "allOf": [
+    { "$ref": "User" },
+    {
+      "type": "object",
+      "properties": {
+        "user": { "type": "string" }, 
+        "farmDetails": {
+          "type": "object",
+          "properties": {
+            "farmLocation": {
+              "type": "object",
+              "properties": {
+                "latitude": { "type": "number" },
+                "longitude": { "type": "number" },
+                "address": { "type": "string" }
               },
-              "farmSize": { "type": "number" },
-              "cropsGrown": {
-                "type": "array",
-                "items": { "type": "string" }
-              },
-              "licenseCertifications": {
-                "type": "array",
-                "items": { "type": "string" }
-              }
+              "required": ["latitude", "longitude", "address"]
             },
-            "required": ["farmLocation", "farmSize", "cropsGrown"]
-          },
-          "financialDetails": {
-            "type": "object",
-            "properties": {
-              "creditScore": { "type": "number" },
-              "loanApplications": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "loanId": { "type": "string" },
-                    "amount": { "type": "number" },
-                    "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
-                    "applicationDate": { "type": "string", "format": "date-time" }
-                  },
-                  "required": ["loanId", "amount", "status", "applicationDate"]
-                }
-              },
-              "subsidyApplications": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "applicationId": { "type": "string" },
-                    "subsidyType": { "type": "string" },
-                    "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
-                    "applicationDate": { "type": "string", "format": "date-time" }
-                  },
-                  "required": ["applicationId", "subsidyType", "status", "applicationDate"]
-                }
-              }
+            "farmSize": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cropsGrown": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1
+            },
+            "licenseCertifications": {
+              "type": "array",
+              "items": { "type": "string" }
             }
+          },
+          "required": ["farmLocation", "farmSize", "cropsGrown"]
+        },
+        "creditScore": {
+          "type": "object",
+          "properties": {
+            "score": {
+              "type": "number",
+              "minimum": 300,
+              "maximum": 850
+            },
+            "lastUpdated": { "type": "string", "format": "date-time" }
           }
         },
-        "required": ["farmDetails"]
-      }
-    ]
-  }
-  
+        "bankDetails": {
+          "type": "object",
+          "properties": {
+            "accountNumber": { "type": "string" },
+            "bankName": { "type": "string" },
+            "accountHolder": { "type": "string" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user", "farmDetails"]
+    }
+  ]
+}

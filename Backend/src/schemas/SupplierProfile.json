@@ -1,34 +1,33 @@
 {
-    "$id": "SupplierProfile",
-    "allOf": [
-      { "$ref": "User" },
-      {
-        "type": "object",
-        "properties": {
-          "supplierDetails": {
-            "type": "object",
-            "properties": {
-              "suppliedProducts": {
-                "type": "array",
-                "items": { "type": "string" }
-              },
-              "logistics": {
-                "type": "object",
-                "properties": {
-                  "deliveryAreas": {
-                    "type": "array",
-                    "items": { "type": "string" }
-                  },
-                  "averageDeliveryTime": { "type": "number" }
+  "$id": "SupplierProfile",
+  "allOf": [
+    { "$ref": "User" },
+    {
+      "type": "object",
+      "properties": {
+        "user": { "type": "string" },  
+        "supplierDetails": {
+          "type": "object",
+          "properties": {
+            "logistics": {
+              "type": "object",
+              "properties": {
+                "deliveryAreas": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "minItems": 1
                 },
-                "required": ["deliveryAreas", "averageDeliveryTime"]
-              }
-            },
-            "required": ["suppliedProducts", "logistics"]
-          }
+                "averageDeliveryTime": { "type": "number", "minimum": 0 }
+              },
+              "required": ["deliveryAreas"]
+            }
+          },
+          "required": ["logistics"]
         },
-        "required": ["supplierDetails"]
-      }
-    ]
-  }
-  
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user", "supplierDetails"]
+    }
+  ]
+}

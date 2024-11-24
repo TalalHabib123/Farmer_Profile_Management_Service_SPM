@@ -22,6 +22,36 @@ exports.createUser = async (userData) => {
   }
 };
 
+exports.createFarmerProfile = async (userId, profileData) => {
+  try {
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/farmer`, profileData);
+    return response.data;
+  }
+  catch (error) {
+    handleError(error);
+  }
+};
+
+exports.createGovOffProfile = async (userId, profileData) => {
+  try {
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/govoff`, profileData);
+    return response.data;
+  }
+  catch (error) {
+    handleError(error);
+  }
+};
+
+exports.createSupplierProfile = async (userId, profileData) => {
+  try {
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/supplier`, profileData);
+    return response.data;
+  }
+  catch (error) {
+    handleError(error);
+  }
+};
+
 exports.getUserById = async (userId) => {
   try {
     const response = await axios.get(`${DATABASE_SERVICE_URL}/users/${userId}`);
