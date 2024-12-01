@@ -6,7 +6,7 @@ addFormats(ajv);
 
 const userSchema = require('../schemas/User.json');
 const farmerSchema = require('../schemas/FarmerProfile.json');
-const govSchema = require('../schemas/GovermentOfficail.json');
+const govSchema = require('../schemas/GovernmentOfficail.json');
 const supplierSchema = require('../schemas/SupplierProfile.json');
 
 ajv.addSchema(userSchema, 'User');
