@@ -22,12 +22,21 @@ exports.createUser = async (userData) => {
   }
 };
 
-exports.createFarmerProfile = async (userId, profileData) => {
+exports.createFarmerProfile = async (profileData) => {
   try {
-    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/farmer`, profileData);
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/farmerProfiles/`, profileData);
     return response.data;
   }
   catch (error) {
+    handleError(error);
+  }
+};
+
+exports.updateFarmerProfile = async (userId, updateData) => {
+  try {
+    const response = await axios.put(`${DATABASE_SERVICE_URL}/farmerProfiles/${userId}`, updateData);
+    return response.data;
+  } catch (error) {
     handleError(error);
   }
 };

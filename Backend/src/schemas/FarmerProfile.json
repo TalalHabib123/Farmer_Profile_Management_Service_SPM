@@ -5,7 +5,10 @@
     {
       "type": "object",
       "properties": {
-        "user": { "type": "string" }, 
+        "user": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{24}$"
+        },
         "farmDetails": {
           "type": "object",
           "properties": {
@@ -18,10 +21,7 @@
               },
               "required": ["latitude", "longitude", "address"]
             },
-            "farmSize": {
-              "type": "number",
-              "minimum": 0
-            },
+            "farmSize": { "type": "number", "minimum": 0 },
             "cropsGrown": {
               "type": "array",
               "items": { "type": "string" },
@@ -53,10 +53,68 @@
             "accountHolder": { "type": "string" }
           }
         },
+        "contributionStats": {
+          "type": "object",
+          "properties": {
+            "numContributed": { "type": "integer", "minimum": 0, "default": 0 },
+            "numLabeled": { "type": "integer", "minimum": 0, "default": 0 },
+            "numValidated": { "type": "integer", "minimum": 0, "default": 0 }
+          }
+        },
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "object",
+              "properties": {
+                "heat": { "type": "number", "default": 35 },
+                "frost": { "type": "number", "default": 0 }
+              },
+              "required": ["heat", "frost"]
+            },
+            "precipitation": {
+              "type": "object",
+              "properties": {
+                "droughtDays": { "type": "number", "default": 7 },
+                "flood": { "type": "number", "default": 50 }
+              },
+              "required": ["droughtDays", "flood"]
+            },
+            "humidity": {
+              "type": "object",
+              "properties": {
+                "pestRiskHumidity": { "type": "number", "default": 80 },
+                "pestRiskTempRange": {
+                  "type": "array",
+                  "items": { "type": "number" },
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "default": [15, 30]
+                }
+              },
+              "required": ["pestRiskHumidity", "pestRiskTempRange"]
+            },
+            "wind": {
+              "type": "object",
+              "properties": {
+                "strongWind": { "type": "number", "default": 40 }
+              },
+              "required": ["strongWind"]
+            },
+            "uv": {
+              "type": "object",
+              "properties": {
+                "highUV": { "type": "number", "default": 8 }
+              },
+              "required": ["highUV"]
+            }
+          },
+          "required": ["temperature", "precipitation", "humidity", "wind", "uv"]
+        },
         "createdAt": { "type": "string", "format": "date-time" },
         "updatedAt": { "type": "string", "format": "date-time" }
       },
-      "required": ["user", "farmDetails"]
+      "required": ["user", "farmDetails", "createdAt", "updatedAt"]
     }
   ]
 }

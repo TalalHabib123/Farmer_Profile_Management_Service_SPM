@@ -6,13 +6,25 @@ const farmerController = {
   createFarmerProfile: async (req, res, next) => {
     try {
       const { ...profileData } = req.body;
-      validateFarmerProfile(profileData);
-      const farmerProfile = await databaseService.createFarmerProfile(req.params.userId, profileData);
+      // validateFarmerProfile(profileData);
+      const farmerProfile = await databaseService.createFarmerProfile(profileData);
       res.status(201).json(farmerProfile);
     } catch (error) {
       next(error);
     }
   },
+
+  updateFarmerProfile: async (req, res, next) => {
+    try {
+        const { ...updateData } = req.body;
+        const userId = req.params.userId;
+        const updatedFarmerProfile = await databaseService.updateFarmerProfile(userId, updateData);
+        res.json(updatedFarmerProfile);
+    } catch (error) {
+      next(error);
+    }
+  },
+      
 
   getFarmerByID: async (req, res, next) => {
     try {
@@ -25,7 +37,8 @@ const farmerController = {
 
   getAllFields: async (req, res, next) => {
     try {
-      const fields = await databaseService.getAllFarmerFields(req.params.userId);
+      const profile = await databaseService.getFarmerById(req.params.userId);
+      const fields = profile.farmDetails;
       res.json(fields);
     } catch (error) {
       next(error);
@@ -34,66 +47,14 @@ const farmerController = {
 
   getFieldById: async (req, res, next) => {
     try {
-      const field = await databaseService.getFarmerFieldById(req.params.fieldId);
+      const profile = await databaseService.getFarmerById(req.params.userId);
+      const field = profile.farmDetails.farmLocation;
       res.json(field);
     } catch (error) {
       next(error);
     }
   },
 
-  getAllRegulations: async (req, res, next) => {
-    try {
-      const regulations = await subsidyandregService.getAllRegulations(req.params.userId);
-      res.json(regulations);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  getRegulationById: async (req, res, next) => {
-    try {
-      const regulation = await subsidyandregService.getRegulationById(req.params.regulationId);
-      res.json(regulation);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  getAllLoanApplications: async (req, res, next) => {
-    try {
-      const loanApplications = await subsidyandregService.getAllLoanApplications(req.params.userId);
-      res.json(loanApplications);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  getLoanApplicationById: async (req, res, next) => {
-    try {
-      const loanApplication = await subsidyandregService.getLoanApplicationById(req.params.loanApplicationId);
-      res.json(loanApplication);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  getAllSubsidyApplications: async (req, res, next) => {
-    try {
-      const subsidyApplications = await subsidyandregService.getAllSubsidyApplications(req.params.userId);
-      res.json(subsidyApplications);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  getSubsidyApplicationById: async (req, res, next) => {
-    try {
-      const subsidyApplication = await subsidyandregService.getSubsidyApplicationById(req.params.subsidyApplicationId);
-      res.json(subsidyApplication);
-    } catch (error) {
-      next(error);
-    }
-  },
 };
 
 module.exports = farmerController;
