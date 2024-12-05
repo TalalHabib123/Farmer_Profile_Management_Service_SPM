@@ -14,6 +14,15 @@ const farmerController = {
     }
   },
 
+  getFarmerByID: async (req, res, next) => {
+    try {
+      const farmer = await databaseService.getFarmerById(req.params.userId);
+      res.json(farmer);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   getAllFields: async (req, res, next) => {
     try {
       const fields = await databaseService.getAllFarmerFields(req.params.userId);

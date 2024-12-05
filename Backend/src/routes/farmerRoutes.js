@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 router.route('/:userId/profile')
-    .post(farmerController.createFarmerProfile);
+    .post(farmerController.createFarmerProfile)
+    .get(farmerController.getFarmerByID);
 
 router.route('/:userId/fields')
     .get(farmerController.getAllFields);

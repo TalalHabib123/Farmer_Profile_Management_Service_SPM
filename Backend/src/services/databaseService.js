@@ -32,6 +32,15 @@ exports.createFarmerProfile = async (userId, profileData) => {
   }
 };
 
+exports.getFarmerById = async (userId) => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/farmerProfiles/${userId}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 exports.createGovOffProfile = async (userId, profileData) => {
   try {
     const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/govoff`, profileData);
