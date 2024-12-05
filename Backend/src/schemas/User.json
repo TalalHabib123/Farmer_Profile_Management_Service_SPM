@@ -2,24 +2,32 @@
   "$id": "User",
   "type": "object",
   "properties": {
-    "userId": { "type": "string" },
-    "username": { "type": "string", "minLength": 3, "maxLength": 30 },
-    "password": { "type": "string" },
-    "roles": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["Farmer", "Supplier", "Buyer", "Admin", "GovernmentOfficial"]
-      },
-      "minItems": 1
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 30
+    },
+    "password": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{24}$" 
     },
     "status": {
       "type": "string",
       "enum": ["active", "inactive"],
       "default": "active"
     },
-    "failedLoginAttempts": { "type": "integer", "minimum": 0, "default": 0 },
-    "lastLogin": { "type": "string", "format": "date-time" },
+    "failedLoginAttempts": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "lastLogin": {
+      "type": "string",
+      "format": "date-time"
+    },
     "personalDetails": {
       "type": "object",
       "properties": {
@@ -47,11 +55,27 @@
     "preferences": {
       "type": "object",
       "properties": {
-        "notifications": { "type": "boolean", "default": true }
+        "notifications": {
+          "type": "boolean",
+          "default": true
+        }
       }
     },
-    "createdAt": { "type": "string", "format": "date-time" },
-    "updatedAt": { "type": "string", "format": "date-time" }
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
   },
-  "required": ["userId", "username", "password", "roles", "personalDetails", "createdAt", "updatedAt"]
+  "required": [
+    "username",
+    "password",
+    "role",
+    "personalDetails",
+    "createdAt",
+    "updatedAt"
+  ]
 }

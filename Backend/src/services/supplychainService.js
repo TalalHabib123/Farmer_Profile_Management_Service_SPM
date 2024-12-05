@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const SUPPLYCHAIN_SERVICE_URL = process.env.SUPPLYCHAIN_SERVICE_URL;
+const SUPPLYCHAIN_SERVICE_URL = process.env.DATABASE_SERVICE_URL;
 
 // Helper function to handle errors
 const handleError = (error) => {

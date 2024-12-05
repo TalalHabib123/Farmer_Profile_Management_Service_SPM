@@ -15,7 +15,7 @@ const handleError = (error) => {
 // User Services
 exports.createUser = async (userData) => {
   try {
-    const response = await axios.post(`${DATABASE_SERVICE_URL}/users`, userData);
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/`, userData);
     return response.data;
   } catch (error) {
     handleError(error);
@@ -84,7 +84,7 @@ exports.deleteUser = async (userId) => {
 
 exports.listUsers = async (query) => {
   try {
-    const response = await axios.get(`${DATABASE_SERVICE_URL}/users`, { params: query });
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/users/`, { params: query });
     return response.data;
   } catch (error) {
     handleError(error);
