@@ -11,9 +11,9 @@ const handleError = (error) => {
     }
 };
 
-exports.getAllProducts = async (SupplierID) => {
+exports.getAllProducts = async () => {
     try {
-        const response = await axios.get(`${SUPPLYCHAIN_SERVICE_URL}/products/${SupplierID}/all`);
+        const response = await axios.get(`${SUPPLYCHAIN_SERVICE_URL}/products/`);
         return response.data;
     } catch (error) {
         handleError(error);

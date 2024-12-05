@@ -13,5 +13,8 @@ router.route('/:userId')
 
 router.route('/:userId/subsidies')
     .get(govoffController.getCreatedSubsidies);
+
+router.route('/:userId/department')
+    .get(govoffController.getGovOffDepartment);
     
 module.exports = router;
