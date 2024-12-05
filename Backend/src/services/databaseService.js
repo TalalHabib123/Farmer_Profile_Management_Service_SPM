@@ -50,9 +50,9 @@ exports.getFarmerById = async (userId) => {
   }
 };
 
-exports.createGovOffProfile = async (userId, profileData) => {
+exports.createGovOffProfile = async (profileData) => {
   try {
-    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/govoff`, profileData);
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/governmentOfficials/`, profileData);
     return response.data;
   }
   catch (error) {
@@ -131,6 +131,51 @@ exports.deleteFarmerProfile = async (userId) => {
   try {
     await axios.delete(`${DATABASE_SERVICE_URL}/farmerProfiles/${userId}`);
     return true;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.updateGovOffProfile = async (userId, updateData) => {
+  try {
+    const response = await axios.put(`${DATABASE_SERVICE_URL}/governmentOfficials/${userId}`, updateData);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.deleteGovOffProfile = async (userId) => {
+  try {
+    await axios.delete(`${DATABASE_SERVICE_URL}/governmentOfficials/${userId}`);
+    return true;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getAllGovOffProfiles = async () => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/governmentOfficials/`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getGovProfById = async (userId) => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/governmentOfficials/${userId}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getSubsidies = async () => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/subsidies/`);
+    return response.data;
   } catch (error) {
     handleError(error);
   }

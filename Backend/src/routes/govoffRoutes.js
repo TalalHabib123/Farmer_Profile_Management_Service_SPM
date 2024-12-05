@@ -2,13 +2,16 @@ const govoffController = require('../controllers/govoffController');
 const express = require('express');
 const router = express.Router();
 
-router.route('/:userId/profile')
+router.route('/')
+    .get(govoffController.getAllGovOffProfiles)
     .post(govoffController.createGovOffProfile);
 
-router.route('/:userId/subsidies')
-    .get(govoffController.getAllSubsidies);
+router.route('/:userId')
+    .get(govoffController.getGovOffProfile)
+    .put(govoffController.updateGovOffProfile)
+    .delete(govoffController.deleteGovOffProfile);
 
-router.route('/:userId/subsidies/:subsidyId')
-    .get(govoffController.getSubsidyById);
+router.route('/:userId/subsidies')
+    .get(govoffController.getCreatedSubsidies);
     
 module.exports = router;
