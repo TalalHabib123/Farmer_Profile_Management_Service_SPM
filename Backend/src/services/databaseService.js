@@ -60,9 +60,9 @@ exports.createGovOffProfile = async (profileData) => {
   }
 };
 
-exports.createSupplierProfile = async (userId, profileData) => {
+exports.createSupplierProfile = async (profileData) => {
   try {
-    const response = await axios.post(`${DATABASE_SERVICE_URL}/users/${userId}/supplier`, profileData);
+    const response = await axios.post(`${DATABASE_SERVICE_URL}/supplierProfiles/`, profileData);
     return response.data;
   }
   catch (error) {
@@ -176,6 +176,42 @@ exports.getSubsidies = async () => {
   try {
     const response = await axios.get(`${DATABASE_SERVICE_URL}/subsidies/`);
     return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getSupplierById = async (userId) => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/supplierProfiles/${userId}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.updateSupplierProfile = async (userId, updateData) => {
+  try {
+    const response = await axios.put(`${DATABASE_SERVICE_URL}/supplierProfiles/${userId}`, updateData);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.getAllSupplierProfiles = async () => {
+  try {
+    const response = await axios.get(`${DATABASE_SERVICE_URL}/supplierProfiles/`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+exports.deleteSupplierProfile = async (userId) => {
+  try {
+    await axios.delete(`${DATABASE_SERVICE_URL}/supplierProfiles/${userId}`);
+    return true;
   } catch (error) {
     handleError(error);
   }

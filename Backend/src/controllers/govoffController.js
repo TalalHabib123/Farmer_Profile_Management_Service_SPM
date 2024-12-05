@@ -63,7 +63,18 @@ const govoffController = {
     } catch (error) {
       next(error);
     }
-  }
+  },
+
+  getGovOffDepartment: async (req, res, next) => {
+    try {
+      const userId = req.params.userId;
+      const govOffProfile = await databaseService.getGovProfById(userId);
+      const department = govOffProfile.department;
+      res.json(department);
+    } catch (error) {
+      next(error);
+    }
+  },
 
 };
 

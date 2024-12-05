@@ -2,13 +2,17 @@ const supplierController = require('../controllers/supplierController');
 const express = require('express');
 const router = express.Router();
 
-router.route('/:userId/profile')
+router.route('/')
+    .get(supplierController.getAllSuppliers)
     .post(supplierController.createSupplierProfile);
+
+router.route('/:userId')
+    .get(supplierController.getSupplierById)
+    .put(supplierController.updateSupplierProfile)
+    .delete(supplierController.deleteSupplierProfile);
 
 router.route('/:userId/products')
     .get(supplierController.getAllProducts);
-router.route('/:userId/products/:productId')
-    .get(supplierController.getProductById);
 
 
 module.exports = router;
