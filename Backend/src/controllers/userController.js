@@ -2,9 +2,6 @@
 const databaseService = require('../services/databaseService');
 const {
   validateUser,
-  validateFarmerProfile,
-  validateGovOffProfile,
-  validateSupplierProfile,
 } = require('../utils/validationMiddleware');
 
 const userController = {
@@ -16,6 +13,15 @@ const userController = {
 
       const user = await databaseService.createUser(userData);
       res.status(201).json(user);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updatePersonalDetail: async (req, res, next) => {
+    try {
+      const updatedUser = await databaseService.updateUserPersonalDetails(req.params.userId, req.body);
+      res.json(updatedUser);
     } catch (error) {
       next(error);
     }
@@ -35,28 +41,8 @@ const userController = {
 
   updateUser: async (req, res, next) => {
     try {
-      const existingUser = await databaseService.getUserById(req.params.userId);
-      if (!existingUser) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-
-      const { role } = existingUser;
-
       // Validate updates based on role
       validateUser(req.body, false); // Allow partial updates
-      switch (role) {
-        case 'Farmer':
-          validateFarmerProfile(req.body, false);
-          break;
-        case 'GovernmentOfficial':
-          validateGovOffProfile(req.body, false);
-          break;
-        case 'Supplier':
-          validateSupplierProfile(req.body, false);
-          break;
-        default:
-          return res.status(400).json({ error: 'Invalid role specified' });
-      }
 
       const updatedUser = await databaseService.updateUser(req.params.userId, req.body);
       res.json(updatedUser);
@@ -109,7 +95,12 @@ const userController = {
 
   deleteUserPreferences: async (req, res, next) => {
     try {
-      await databaseService.deleteUserPreferences(req.params.userId);
+      let user = await databaseService.getUserById(req.params.userId);
+      if (!user || !user.preferences) {
+        return res.status(404).json({ error: 'Preferences not found' });
+      }
+      user.preferences = undefined;
+      await databaseService.updateUser(req.params.userId, user);
       res.status(204).send();
     } catch (error) {
       next(error);

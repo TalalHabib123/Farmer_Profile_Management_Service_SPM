@@ -118,37 +118,19 @@ exports.updateUserPreferences = async (userId, preferences) => {
   }
 };
 
-exports.getUserPreferences = async (userId) => {
+exports.updateUserPersonalDetails = async (userId, personalDetails) => {
   try {
-    const response = await axios.get(`${DATABASE_SERVICE_URL}/users/${userId}/preferences`);
+    const response = await axios.put(`${DATABASE_SERVICE_URL}/users/${userId}/PersonalDetails`, personalDetails);
     return response.data;
   } catch (error) {
     handleError(error);
   }
-};
+}
 
-exports.deleteUserPreferences = async (userId) => {
+exports.deleteFarmerProfile = async (userId) => {
   try {
-    await axios.delete(`${DATABASE_SERVICE_URL}/users/${userId}/preferences`);
+    await axios.delete(`${DATABASE_SERVICE_URL}/farmerProfiles/${userId}`);
     return true;
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-exports.getAllFarmerFields = async (FarmerID) => {
-  try {
-    const response = await axios.get(`${DATABASE_SERVICE_URL}/users/${FarmerID}/farmer/fields/all`);
-    return response.data;
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-exports.getFarmerFieldById = async (FarmerID, fieldID) => {
-  try {
-    const response = await axios.get(`${DATABASE_SERVICE_URL}/users/${FarmerID}/farmer/fields/${fieldID}`);
-    return response.data;
   } catch (error) {
     handleError(error);
   }

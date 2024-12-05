@@ -12,8 +12,13 @@ router.route('/:userId')
     .put(userController.updateUser)
     .delete(userController.deleteUser)
 
+router.route('/:userId/personal')
+    .put(userController.updatePersonalDetail);
+
 router.route('/:userId/preferences')
+    .get(userController.getUserPreferences)
     .put(userController.updateUserPreferences)
+    .delete(userController.deleteUserPreferences);
 
 
 module.exports = router;

@@ -25,7 +25,15 @@ const farmerController = {
     }
   },
       
-
+  deleteFarmerProfile: async (req, res, next) => {
+    try {
+      const userId = req.params.userId;
+      await databaseService.deleteFarmerProfile(userId);
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
+  },
   getFarmerByID: async (req, res, next) => {
     try {
       const farmer = await databaseService.getFarmerById(req.params.userId);
@@ -50,6 +58,30 @@ const farmerController = {
       const profile = await databaseService.getFarmerById(req.params.userId);
       const field = profile.farmDetails.farmLocation;
       res.json(field);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getFarmerCreditScore: async (req, res, next) => {
+    try {
+      const farmer = await databaseService.getFarmerById(req.params.userId);
+      const credit = farmer.creditScore;
+      res.json(credit);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getFarmerThreshold: async (req, res, next) => {
+    try {
+      const farmer = await databaseService.getFarmerById(req.params.userId);
+      const threshold = farmer.thresholds;
+      if (!threshold) {
+        res.status(404).json({ message: 'Threshold not found' });
+        return;
+      }
+      res.json(threshold);
     } catch (error) {
       next(error);
     }

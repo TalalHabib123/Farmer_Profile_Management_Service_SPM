@@ -7,26 +7,18 @@ router.route('/')
 
 router.route('/:userId/profile')
     .get(farmerController.getFarmerByID)
-    .put(farmerController.updateFarmerProfile);
+    .put(farmerController.updateFarmerProfile)
+    .delete(farmerController.deleteFarmerProfile);
 
 router.route('/:userId/fields')
     .get(farmerController.getAllFields);
-router.route('/:userId/fields/:fieldId')
+router.route('/:userId/field_location')
     .get(farmerController.getFieldById);
 
-// router.route('/:userId/regulations')
-//     .get(farmerController.getAllRegulations);
-// router.route('/:userId/regulations/:regulationId')
-//     .get(farmerController.getRegulationById);
+router.route('/:userId/credit')
+    .get(farmerController.getFarmerCreditScore);
 
-// router.route('/:userId/loanapplications')
-//     .get(farmerController.getAllLoanApplications);
-// router.route('/:userId/loanapplications/:loanApplicationId')
-//     .get(farmerController.getLoanApplicationById);
-
-// router.route('/:userId/subsidyapplications')
-//     .get(farmerController.getAllSubsidyApplications);
-// router.route('/:userId/subsidyapplications/:subsidyApplicationId')
-//     .get(farmerController.getSubsidyApplicationById);
+router.route('/:userId/threshold')
+    .get(farmerController.getFarmerThreshold);
 
 module.exports = router;
