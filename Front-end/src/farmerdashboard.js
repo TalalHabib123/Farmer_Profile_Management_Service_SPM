@@ -76,11 +76,14 @@ const FarmerDashboard = () => {
           <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2">×</button>
         </div>
         <nav className="p-4 space-y-2">
-          {['Profile', 'Weather Alerts', 'Crop Management'].map((item) => (
+          {['Farmer Profile', 'Supplier Dashboard' , 'Subsidy Applications', 'Government Dashboard'].map((item) => (
             <Link
             key={item}
             to={
                     item === 'Profile' ? '/farmerprofile' :
+                    item === 'Supplier' ? '/supplierDashboard' :
+                    item === 'Subsidy Applications' ? '/subsidy' :
+                    item === 'Government' ? '/governmentDashboard' :
                         '#'
             }
               className={`flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-green-50 hover:text-green-600 transition-colors ${

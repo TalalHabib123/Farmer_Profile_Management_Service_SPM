@@ -14,10 +14,10 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<SupplierDashboard />} />
+          <Route exact path="/" element={<FarmerDashboard />} />
           <Route path="/supplierprofile" element={<SupplierProfile />} />
           <Route path="/products" element={<ProductManagement />} />
-          <Route path="/farmerDashboard" element={<FarmerDashboard />} />
+          <Route path="/supplierDashboard" element={<SupplierDashboard />} />
           <Route path="/farmerprofile" element={<FarmerProfile />} />
           <Route path="/subsidy" element={<SubsidyManagement />} />
           <Route path="/governmentDashboard" element={<GovernmentDashboard />} />
