@@ -80,10 +80,10 @@ const FarmerDashboard = () => {
             <Link
             key={item}
             to={
-                    item === 'Profile' ? '/farmerprofile' :
-                    item === 'Supplier' ? '/supplierDashboard' :
+                    item === 'Farmer Profile' ? '/farmerprofile' :
+                    item === 'Supplier Dashboard' ? '/supplierDashboard' :
                     item === 'Subsidy Applications' ? '/subsidy' :
-                    item === 'Government' ? '/governmentDashboard' :
+                    item === 'Government Dashboard' ? '/governmentDashboard' :
                         '#'
             }
               className={`flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-green-50 hover:text-green-600 transition-colors ${

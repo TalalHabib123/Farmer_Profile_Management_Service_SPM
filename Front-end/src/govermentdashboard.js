@@ -40,7 +40,7 @@ const GovernmentDashboard = () => {
       } lg:translate-x-0`}>
         <div className="flex items-center justify-between p-4 border-b">
           <div>
-            <span className="text-xl font-bold text-green-600">GovPortal</span>
+            <span className="text-xl font-bold text-green-600">AgriLink</span>
             <p className="text-sm text-gray-600">{governmentDetails.department}</p>
           </div>
           <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden">×</button>
